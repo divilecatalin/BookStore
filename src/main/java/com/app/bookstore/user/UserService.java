@@ -27,5 +27,9 @@ public class UserService {
 		existingUser.setEmail(userToUpdate.getEmail());
 		return userRepository.save(existingUser);
 	}
+	
+	public void delete(Integer id) {
+		userRepository.deleteById(id);
+	}
 
 }

@@ -1,6 +1,10 @@
-package com.app.bookstore.user;
+package com.app.bookstore.user.mapper;
 
 import org.springframework.stereotype.Component;
+
+import com.app.bookstore.user.User;
+import com.app.bookstore.user.dto.UserCreateDTO;
+import com.app.bookstore.user.dto.UserGetDTO;
 
 @Component
 public class UserMapper {
