@@ -21,6 +21,7 @@ public class UserService {
 	
 	public User update(User userToUpdate, Integer userId) {
 		User existingUser = userRepository.findById(userId).orElseThrow();
+		existingUser.setName(userToUpdate.getFirstName() + " " + userToUpdate.getLastName());
 		existingUser.setFirstName(userToUpdate.getFirstName());
 		existingUser.setAge(userToUpdate.getAge());
 		existingUser.setLastName(userToUpdate.getLastName());

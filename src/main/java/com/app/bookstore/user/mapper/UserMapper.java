@@ -11,6 +11,7 @@ public class UserMapper {
 	
 	public User userCreateDTO2User(UserCreateDTO userCreateDto) {
 		User user = new User();
+		user.setName(userCreateDto.getName());
 		user.setAge(userCreateDto.getAge());
 		user.setEmail(userCreateDto.getEmail());
 		user.setFirstName(userCreateDto.getFirstName());
@@ -20,6 +21,7 @@ public class UserMapper {
 	
 	public UserGetDTO user2UserGetDTO(User user) {
 		UserGetDTO userGetDTO = new UserGetDTO();
+		userGetDTO.setName(user.getName());
 		userGetDTO.setAge(user.getAge());
 		userGetDTO.setEmail(user.getEmail());
 		userGetDTO.setFirstName(user.getFirstName());

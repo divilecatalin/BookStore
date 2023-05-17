@@ -1,6 +1,8 @@
 package com.app.bookstore.user.dto;
 
 public class UserCreateDTO {
+	
+	private String name;
 
 	private String firstName;
 	
@@ -9,6 +11,14 @@ public class UserCreateDTO {
 	private Integer age;
 	
 	private String email;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public String getFirstName() {
 		return firstName;

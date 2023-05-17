@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.bookstore.book.dto.BookCreateDTO;
 import com.app.bookstore.book.dto.BookGetDTO;
+import com.app.bookstore.book.dto.BookWithExemplariesDTO;
 import com.app.bookstore.book.mapper.BookMapper;
 
 @RestController
@@ -50,11 +51,28 @@ public class BookController {
 
 	}
 
+	@GetMapping("/name")
+	public List<BookGetDTO> findByName(@RequestParam String name) {
+		return bookMapper.listBook2listGetDTO(bookService.findByName(name));
+	}
+	
+	@GetMapping("/search")
+	public List<BookGetDTO> findByTitleLike(@RequestParam String title){
+		return bookMapper.listBook2listGetDTO(bookService.findByTitleContains(title));
+	}
+	
 	@GetMapping("/list")
 	public List<Book> findAll() {
 		return bookService.findAll();
 	}
 
+	
+	//duce la n+1 select problem (1 query pentru parinte, n query-uri pentru fiecare parinte (n = numarul de parinti))
+	@GetMapping("/list-with-exemplaries")
+	public List<BookWithExemplariesDTO> findAllWithExemplaries() {
+		return bookMapper.bookList2BooksWithExemplariesDTO(bookService.findAll());
+	}
+	
 	@PutMapping("/{id}")
 	public BookGetDTO update(@RequestBody BookCreateDTO bookCreateDTO, @PathVariable Integer id) {
 		Book book = bookMapper.bookCreateDTO2Book(bookCreateDTO);
@@ -67,10 +85,5 @@ public class BookController {
 		bookService.delete(id);
 	}
 
-	@GetMapping("/name")
-	public List<BookGetDTO> findByName(@RequestParam String name) {
-		return bookMapper.listBook2listGetDTO(bookService.findByName(name));
-
-	}
 
 }

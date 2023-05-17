@@ -10,6 +10,7 @@ public class BookService {
 	
 	@Autowired
 	private BookRepository bookRepository;
+	
 	public Book create(Book book) {
 		return bookRepository.saveAndFlush(book);
 	}
@@ -22,12 +23,19 @@ public class BookService {
 		return bookRepository.findAll();
 	}
 	
+	public List<Book> findByName(String title){
+		return bookRepository.findByTitle(title);
+	}
+	
+	public List<Book> findByTitleContains(String title){
+		return bookRepository.findByTitleContains(title);
+	}
 	
 	public Book update(Book bookToUpdate,Integer id) {
 		Book existingBook = bookRepository.findById(id).orElseThrow();
-		existingBook.setAuthor(bookToUpdate.getAuthor());
-		existingBook.setName(bookToUpdate.getName());
-		existingBook.setPrice(bookToUpdate.getPrice());
+		existingBook.setTitle(bookToUpdate.getTitle());
+		existingBook.setYear(bookToUpdate.getYear());
+		existingBook.setIsbn(bookToUpdate.getIsbn());
 		return bookRepository.save(existingBook);
 	}
 	
@@ -35,9 +43,5 @@ public class BookService {
 		bookRepository.deleteById(id);
 	}
 	
-	
-	public List<Book> findByName(String name){
-		return bookRepository.findByName(name);
-	}
 
 }

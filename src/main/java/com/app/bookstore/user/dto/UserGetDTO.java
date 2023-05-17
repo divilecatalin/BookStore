@@ -1,10 +1,9 @@
 package com.app.bookstore.user.dto;
 
-
-
 public class UserGetDTO {
 
 	private Integer id;
+	private String name;
 	private String firstName;
 	private String lastName;
 	private Integer age;
@@ -14,6 +13,12 @@ public class UserGetDTO {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getFirstName() {
 		return firstName;
