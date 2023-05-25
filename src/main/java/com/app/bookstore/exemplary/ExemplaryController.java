@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.bookstore.GenericDeleteDTO;
 import com.app.bookstore.exemplary.dto.ExemplaryCreateDTO;
 import com.app.bookstore.exemplary.dto.ExemplaryGetDTO;
 import com.app.bookstore.exemplary.mapper.ExemplaryMapper;
 
 @RestController
-@RequestMapping("/exemplary")
+@RequestMapping("/exemplaries")
 public class ExemplaryController {
 	
 	@Autowired
@@ -45,6 +46,8 @@ public class ExemplaryController {
 		return exemplaryMapper.exemplaryList2ExemplaryGetDTOList(exemplaryService.findAll());
 	}
 	
+	//obtin toate exemplarele pentru o carte ce ar id =
+	
 	@PutMapping("/{id}")
 	public ExemplaryGetDTO updateExemplary(@RequestBody ExemplaryCreateDTO exemplaryCreateDTO, @PathVariable Integer id) {
 		Exemplary exemplary = exemplaryMapper.exemplaryCreateDTO2Exemplary(exemplaryCreateDTO);
@@ -53,8 +56,8 @@ public class ExemplaryController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteExemplary(@PathVariable Integer id) {
-		exemplaryService.delete(id);
+	public void deleteExemplary(@RequestBody GenericDeleteDTO deleteId, @PathVariable Integer id) {
+		exemplaryService.delete(id,deleteId.getId());
 	}
 
 }

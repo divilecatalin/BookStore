@@ -38,14 +38,14 @@ public class ExemplaryService {
 		return exemplaryRepository.save(existingExemplary);
 	}
 
-	public void delete(Integer id) {
+	public void delete(Integer id, Integer bookId) {
 		// caz: orphan removal
-//		Exemplary exemplary = exemplaryRepository.findById(id).orElseThrow();
-//		Book book = bookRepository.findById(3).orElseThrow();
-//		book.removeExemplary(exemplary);
-//		bookRepository.flush();
+		Exemplary exemplary = exemplaryRepository.findById(id).orElseThrow();
+		Book book = bookRepository.findById(bookId).orElseThrow();
+		book.removeExemplary(exemplary);
+		bookRepository.flush();
 
-		exemplaryRepository.deleteById(id);
+		//exemplaryRepository.deleteById(id);
 	}
 
 }
