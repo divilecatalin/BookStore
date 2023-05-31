@@ -7,9 +7,14 @@ import org.springframework.stereotype.Component;
 import com.app.bookstore.author.Author;
 import com.app.bookstore.author.dto.AuthorCreateDTO;
 import com.app.bookstore.author.dto.AuthorGetDTO;
+import com.app.bookstore.author.dto.AuthorWithBooksDTO;
+import com.app.bookstore.book.mapper.BookMapper;
 
 @Component
 public class AuthorMapper {
+	
+//	@Autowired
+//	private BookMapper bookMapper;
 	
 	public Author authorCreateDTO2Author(AuthorCreateDTO authorCreateDTO) {
 		Author author = new Author();
@@ -36,6 +41,24 @@ public class AuthorMapper {
 		return authors.stream()
 				.map(author -> author2AuthorGetDTO(author))
 				.toList();
+	}
+	
+	public List<AuthorWithBooksDTO> listAuthor2AuthorWithBooksDTO(List<Author> authors){
+		return authors.stream()
+				.map(author -> author2AuthorWithBoosDTO(author))
+				.toList();
+	}
+	
+	private AuthorWithBooksDTO author2AuthorWithBoosDTO(Author author) {
+		AuthorWithBooksDTO authorGetDto = new AuthorWithBooksDTO();
+		authorGetDto.setId(author.getId());
+		authorGetDto.setName(author.getName());
+		authorGetDto.setBirthDate(author.getBirthDate());
+		authorGetDto.setDeathDate(author.getDeathDate());
+		authorGetDto.setGender(author.getGender());
+		authorGetDto.setNationality(author.getNationality());
+		authorGetDto.setBooks(author.getBooks().stream().map(book ->new BookMapper().book2BookGetDTO(book)).toList());
+		return authorGetDto;
 	}
 
 }

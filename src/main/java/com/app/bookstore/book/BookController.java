@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.bookstore.book.dto.BookCreateDTO;
 import com.app.bookstore.book.dto.BookGetDTO;
+import com.app.bookstore.book.dto.BookWithAuthorsDTO;
 import com.app.bookstore.book.dto.BookWithExemplariesDTO;
 import com.app.bookstore.book.mapper.BookMapper;
 
@@ -41,7 +42,12 @@ public class BookController {
 	public ResponseEntity<BookGetDTO> createBook(@RequestBody BookCreateDTO bookCreateDTO){
 		Book book = bookService.create(bookMapper.bookCreateDTO2Book(bookCreateDTO));
 		return new ResponseEntity<>(bookMapper.book2BookGetDTO(book),HttpStatus.CREATED);
-		
+	}
+	
+	@PostMapping("/create")
+	public ResponseEntity<BookWithAuthorsDTO> createBookWithAuthors(@RequestBody BookCreateDTO bookCreateDTO){
+		Book book = bookService.createWithAuthors(bookMapper.bookCreateDTO2Book(bookCreateDTO),bookCreateDTO.getAuthorsId());
+		return new ResponseEntity<>(bookMapper.book2BookWithAuthorsDTO(book),HttpStatus.CREATED);
 	}
 
 	@GetMapping("/{id}")

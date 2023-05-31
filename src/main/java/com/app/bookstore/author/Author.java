@@ -1,12 +1,16 @@
 package com.app.bookstore.author;
 
 import java.time.LocalDate;
+import java.util.Set;
+
+import com.app.bookstore.book.Book;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,6 +36,9 @@ public class Author {
 	
 	@Column(name="nationality")
 	private String nationality;
+	
+	@ManyToMany(mappedBy="authors")
+	private Set<Book> books;
 
 	public Integer getId() {
 		return id;
@@ -80,7 +87,24 @@ public class Author {
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
 	}
+
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}
 	
+	public void addBook(Book book) {
+		this.books.add(book);
+		book.getAuthors().add(this);
+	}
+	
+	public void removeBook(Book book) {
+		this.books.remove(book);
+		book.getAuthors().remove(this);
+	}
 	
 
 }

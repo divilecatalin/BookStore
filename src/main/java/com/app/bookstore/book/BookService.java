@@ -5,13 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.bookstore.author.Author;
+import com.app.bookstore.author.AuthorRepository;
+
 @Service
 public class BookService {
 	
 	@Autowired
 	private BookRepository bookRepository;
+	@Autowired
+	private AuthorRepository authorRepository;
 	
 	public Book create(Book book) {
+		return bookRepository.saveAndFlush(book);
+	}
+	
+	public Book createWithAuthors(Book book, List<Integer> authorsId) {
+		List<Author> authors = authorRepository.findAllById(authorsId);
+		authors.stream().forEach(author -> author.addBook(book));
 		return bookRepository.saveAndFlush(book);
 	}
 	

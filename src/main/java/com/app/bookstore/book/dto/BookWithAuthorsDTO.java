@@ -3,14 +3,21 @@ package com.app.bookstore.book.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-public class BookCreateDTO {
-	
+import com.app.bookstore.author.dto.AuthorGetDTO;
+
+public class BookWithAuthorsDTO {
+	private Integer id;
 	private String title;
 	private LocalDate year;
 	private String isbn;
-	private List<Integer> authorsId;
+	private List<AuthorGetDTO> authors;
 	
-	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -29,15 +36,11 @@ public class BookCreateDTO {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
+	public List<AuthorGetDTO> getAuthors() {
+		return authors;
+	}
+	public void setAuthors(List<AuthorGetDTO> authors) {
+		this.authors = authors;
+	}
 	
-	public List<Integer> getAuthorsId() {
-		return authorsId;
-	}
-	public void setAuthorsId(List<Integer> authorsId) {
-		this.authorsId = authorsId;
-	}
-	@Override
-	public String toString() {
-		return "BookCreateDTO [title=" + title + ", year=" + year + ", isbn=" + isbn + "]";
-	}
 }
