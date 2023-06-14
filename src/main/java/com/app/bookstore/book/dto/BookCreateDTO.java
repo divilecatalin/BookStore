@@ -3,10 +3,15 @@ package com.app.bookstore.book.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.validation.constraints.NotNull;
+
+
 public class BookCreateDTO {
 	
+	@NotNull
 	private String title;
 	private LocalDate year;
+	@NotNull
 	private String isbn;
 	private List<Integer> authorsId;
 	

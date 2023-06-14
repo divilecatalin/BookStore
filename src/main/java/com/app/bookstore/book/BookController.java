@@ -22,6 +22,8 @@ import com.app.bookstore.book.dto.BookWithAuthorsDTO;
 import com.app.bookstore.book.dto.BookWithExemplariesDTO;
 import com.app.bookstore.book.mapper.BookMapper;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -40,7 +42,7 @@ public class BookController {
 //	}
 	
 	@PostMapping
-	public ResponseEntity<BookGetDTO> createBook(@RequestBody BookCreateDTO bookCreateDTO){
+	public ResponseEntity<BookGetDTO> createBook(@Valid @RequestBody BookCreateDTO bookCreateDTO){
 		Book book = bookService.create(bookMapper.bookCreateDTO2Book(bookCreateDTO));
 		return new ResponseEntity<>(bookMapper.book2BookGetDTO(book),HttpStatus.CREATED);
 	}
