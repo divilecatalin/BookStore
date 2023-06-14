@@ -14,7 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Entity
+@Entity(name = "exemplary")
 @Table(name = "exemplary", schema = "public")
 public class Exemplary {
 

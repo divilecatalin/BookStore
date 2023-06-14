@@ -42,6 +42,10 @@ public class BookService {
 		return bookRepository.findByTitleContains(title);
 	}
 	
+	public List<Book> findByBookTitleOrAuthorName(String field){
+		return bookRepository.findBookByTitleOrAuthorName(field);
+	}
+	
 	public Book update(Book bookToUpdate,Integer id) {
 		Book existingBook = bookRepository.findById(id).orElseThrow();
 		existingBook.setTitle(bookToUpdate.getTitle());

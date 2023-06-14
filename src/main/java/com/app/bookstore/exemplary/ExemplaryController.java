@@ -46,6 +46,11 @@ public class ExemplaryController {
 		return exemplaryMapper.exemplaryList2ExemplaryGetDTOList(exemplaryService.findAll());
 	}
 	
+	@GetMapping("/bookId/{bookId}")
+	public List<ExemplaryGetDTO> findExemplaryByBookId(@PathVariable Integer bookId) {
+		return exemplaryMapper.exemplaryList2ExemplaryGetDTOList(exemplaryService.findAllByBookId(bookId));
+	}
+	
 	//obtin toate exemplarele pentru o carte ce ar id =
 	
 	@PutMapping("/{id}")

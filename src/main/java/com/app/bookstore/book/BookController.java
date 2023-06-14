@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,7 +55,6 @@ public class BookController {
 	public BookGetDTO findById(@PathVariable Integer id) {
 		Book book = bookService.findById(id);
 		return bookMapper.book2BookGetDTO(book);
-
 	}
 
 	@GetMapping("/name")
@@ -63,8 +63,13 @@ public class BookController {
 	}
 	
 	@GetMapping("/search")
-	public List<BookGetDTO> findByTitleLike(@RequestParam String title){
-		return bookMapper.listBook2listGetDTO(bookService.findByTitleContains(title));
+	public ResponseEntity<List<BookGetDTO>> findByBookTitleOrAuthorName(@RequestParam String field){
+		
+		List<Book> list = bookService.findByBookTitleOrAuthorName(field);
+		if(CollectionUtils.isEmpty(list)) {
+			return new ResponseEntity<>(bookMapper.listBook2listGetDTO(list),HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(bookMapper.listBook2listGetDTO(list),HttpStatus.OK);
 	}
 	
 	@GetMapping("/list")

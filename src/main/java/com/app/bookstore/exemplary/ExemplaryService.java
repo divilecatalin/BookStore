@@ -29,6 +29,10 @@ public class ExemplaryService {
 	public List<Exemplary> findAll() {
 		return exemplaryRepository.findAll();
 	}
+	
+	public List<Exemplary> findAllByBookId(Integer bookId){
+		return exemplaryRepository.findByBookId(bookId);
+	}
 
 	public Exemplary update(Exemplary exemplary, Integer id) {
 		Exemplary existingExemplary = exemplaryRepository.findById(id).orElseThrow();
