@@ -9,7 +9,6 @@ public class UserCreateDTO {
 	private String lastName;
 	
 	private Integer age;
-	
 	private String email;
 
 	public String getName() {
