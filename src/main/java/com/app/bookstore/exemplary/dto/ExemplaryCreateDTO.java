@@ -2,14 +2,23 @@ package com.app.bookstore.exemplary.dto;
 
 import java.time.LocalDate;
 
+import com.app.bookstore.exception.BasicInfo;
+import com.app.bookstore.exception.EmptyInfo;
+
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 public class ExemplaryCreateDTO {
 
+	@NotNull(groups = BasicInfo.class)
+	@NotEmpty(groups = EmptyInfo.class)
 	private LocalDate releaseDate;
-
+	@NotNull(groups = BasicInfo.class)
+	@NotEmpty(groups = EmptyInfo.class)
 	private String stampCode;
-
 	private Integer pageNumber;
-
+	@NotNull(groups = BasicInfo.class)
+	@NotEmpty(groups = EmptyInfo.class)
 	private Integer bookId;
 
 	public LocalDate getReleaseDate() {

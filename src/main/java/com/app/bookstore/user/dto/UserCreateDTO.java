@@ -1,14 +1,30 @@
 package com.app.bookstore.user.dto;
 
-public class UserCreateDTO {
-	
-	private String name;
+import com.app.bookstore.exception.AdvanceInfo;
+import com.app.bookstore.exception.BasicInfo;
+import com.app.bookstore.exception.EmptyInfo;
+import com.app.bookstore.exception.ValidAge;
+import com.app.bookstore.exception.ValidEmail;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
+public class UserCreateDTO {
+	@NotNull(groups = BasicInfo.class)
+	@NotEmpty(groups = EmptyInfo.class)
+	private String name;
+	@NotNull(groups = BasicInfo.class)
+	@NotEmpty(groups = EmptyInfo.class)
 	private String firstName;
-	
+	@NotNull(groups = BasicInfo.class)
+	@NotEmpty(groups = EmptyInfo.class)
 	private String lastName;
-	
+	@NotNull(groups = BasicInfo.class)
+	@ValidAge(groups = AdvanceInfo.class)
 	private Integer age;
+	@NotNull(groups = BasicInfo.class)
+	@NotEmpty(groups = EmptyInfo.class)
+	@ValidEmail(groups = AdvanceInfo.class)
 	private String email;
 
 	public String getName() {

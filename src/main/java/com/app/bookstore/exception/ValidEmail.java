@@ -10,12 +10,10 @@ import jakarta.validation.Payload;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = YearValidator.class)
-public @interface ValidYear {
-	
-	String message() default "Year is not valid";
-	
+@Constraint(validatedBy = EmailValidator.class)
+public @interface ValidEmail {
+
+	String message() default "Email is not valid";
 	Class<?> [] groups() default {};
 	Class<? extends Payload>[]payload() default{};
- 
 }

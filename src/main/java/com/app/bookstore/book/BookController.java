@@ -79,6 +79,20 @@ public class BookController {
 	public List<BookGetDTO> findAll() {
 		return bookMapper.listBook2listGetDTO(bookService.findAll());
 	}
+	
+	@GetMapping("/listPag")
+	public List<BookGetDTO> findAllPaginated(@RequestParam Integer pageSize,@RequestParam Integer pageNumber) {
+		Integer page = pageNumber;
+		if(pageNumber !=0) {
+			page = pageNumber*pageSize;
+		}
+		return bookMapper.listBook2listGetDTO(bookService.findAllPaginated(pageSize, page));
+	}
+	
+	@GetMapping("/listPag2")
+	public List<BookGetDTO> findPaginated(@RequestParam Integer pageSize,@RequestParam Integer pageNumber) {
+		return bookMapper.listBook2listGetDTO(bookService.findPaginated(pageSize,pageNumber));
+	}
 
 	// duce la n+1 select problem (1 query pentru parinte, n query-uri pentru
 	// fiecare parinte (n = numarul de parinti))

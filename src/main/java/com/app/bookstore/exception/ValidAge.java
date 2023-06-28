@@ -10,12 +10,12 @@ import jakarta.validation.Payload;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = YearValidator.class)
-public @interface ValidYear {
+@Constraint(validatedBy = AgeValidator.class)
+public @interface ValidAge {
 	
-	String message() default "Year is not valid";
+	String message() default "Age is not valid";
 	
 	Class<?> [] groups() default {};
 	Class<? extends Payload>[]payload() default{};
- 
+
 }

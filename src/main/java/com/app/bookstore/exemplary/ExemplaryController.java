@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.bookstore.GenericDeleteDTO;
+import com.app.bookstore.exception.ValidationOrder;
 import com.app.bookstore.exemplary.dto.ExemplaryCreateDTO;
 import com.app.bookstore.exemplary.dto.ExemplaryGetDTO;
 import com.app.bookstore.exemplary.mapper.ExemplaryMapper;
@@ -30,7 +32,7 @@ public class ExemplaryController {
 	private ExemplaryService exemplaryService;
 	
 	@PostMapping()
-	public ResponseEntity<ExemplaryGetDTO> create(@RequestBody ExemplaryCreateDTO exemplaryCreateDTO){
+	public ResponseEntity<ExemplaryGetDTO> create(@Validated(value = ValidationOrder.class)@RequestBody ExemplaryCreateDTO exemplaryCreateDTO){
 		Exemplary exemplary = exemplaryService.create(exemplaryMapper.exemplaryCreateDTO2Exemplary(exemplaryCreateDTO), exemplaryCreateDTO.getBookId());
 		return new ResponseEntity<>(exemplaryMapper.exemplary2ExemplaryGetDTO(exemplary),HttpStatus.CREATED);
 	}

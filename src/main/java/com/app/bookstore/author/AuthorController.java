@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.bookstore.author.dto.AuthorCreateDTO;
 import com.app.bookstore.author.dto.AuthorGetDTO;
 import com.app.bookstore.author.mapper.AuthorMapper;
+import com.app.bookstore.exception.ValidationOrder;
 
 @RestController
 @RequestMapping("/authors")
@@ -30,7 +32,7 @@ public class AuthorController {
 	private AuthorService authorService;
 	
 	@PostMapping
-	public ResponseEntity<AuthorGetDTO> createAuthor(@RequestBody AuthorCreateDTO authorCreateDTO){
+	public ResponseEntity<AuthorGetDTO> createAuthor(@Validated(value = ValidationOrder.class) @RequestBody AuthorCreateDTO authorCreateDTO){
 		Author author = authorService.create(authorMapper.authorCreateDTO2Author(authorCreateDTO));
 		return new ResponseEntity<>(authorMapper.author2AuthorGetDTO(author),HttpStatus.CREATED);
 	}

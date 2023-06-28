@@ -3,6 +3,8 @@ package com.app.bookstore.book;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.app.bookstore.author.Author;
@@ -32,6 +34,15 @@ public class BookService {
 	
 	public List<Book> findAll(){
 		return bookRepository.findAll();
+	}
+	
+	public List<Book> findAllPaginated(Integer pageSize, Integer pageNumber){
+		return bookRepository.findAllPaginated(pageSize, pageNumber);
+	}
+	
+	public List<Book> findPaginated(Integer pageSize, Integer pageNumber){
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+		return bookRepository.findAllBooks(pageable);
 	}
 	
 	public List<Book> findByName(String title){

@@ -5,18 +5,25 @@ import java.util.List;
 
 import com.app.bookstore.exception.AdvanceInfo;
 import com.app.bookstore.exception.BasicInfo;
+import com.app.bookstore.exception.EmptyInfo;
 import com.app.bookstore.exception.ValidYear;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class BookCreateDTO {
 
 	@NotNull(groups = BasicInfo.class)
+	@NotEmpty(groups = EmptyInfo.class)
 	private String title;
 	@NotNull(groups = BasicInfo.class)
 	@ValidYear(groups = AdvanceInfo.class)
 	private LocalDate year;
+	@NotNull(groups = BasicInfo.class)
+	@NotEmpty(groups = EmptyInfo.class)
 	private String isbn;
+	@NotNull(groups = BasicInfo.class)
+	@NotEmpty(groups = EmptyInfo.class)
 	private List<Integer> authorsId;
 
 	public String getTitle() {
