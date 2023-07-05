@@ -21,10 +21,10 @@ public interface BookRepository extends JpaRepository<Book, Integer>{
 	 @Query("SELECT b FROM book b JOIN b.authors a ORDER BY b.id LIMIT :pageSize OFFSET :pageNumber")
 	 List<Book> findAllPaginated(@Param("pageSize") Integer pageSize,@Param("pageNumber") Integer pageNumber);
 	 
-	 List<Book> findByOrderByIdAsc(Pageable pageable);
+	 List<Book> findByOrderByIdAsc();
 	 
-	 @Query("SELECT b FROM book b JOIN b.authors a ORDER BY b.id")
-	 List<Book> findAllBooks(Pageable pageable);
+	 @Query("SELECT b FROM book b LEFT JOIN b.authors a  WHERE b.title like %:field% ORDER BY b.id ")
+	 List<Book> findAllBooks(Pageable pageable,@Param("field") String field);
 
 
 }

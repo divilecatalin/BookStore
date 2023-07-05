@@ -42,7 +42,7 @@ public class BookService {
 	
 	public List<Book> findPaginated(Integer pageSize, Integer pageNumber){
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
-		return bookRepository.findAllBooks(pageable);
+		return bookRepository.findAllBooks(pageable,"Baltagul");
 	}
 	
 	public List<Book> findByName(String title){

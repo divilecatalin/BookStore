@@ -45,11 +45,11 @@ public class AuthorMapper {
 	
 	public List<AuthorWithBooksDTO> listAuthor2AuthorWithBooksDTO(List<Author> authors){
 		return authors.stream()
-				.map(author -> author2AuthorWithBoosDTO(author))
+				.map(author -> author2AuthorWithBooksDTO(author))
 				.toList();
 	}
 	
-	private AuthorWithBooksDTO author2AuthorWithBoosDTO(Author author) {
+	private AuthorWithBooksDTO author2AuthorWithBooksDTO(Author author) {
 		AuthorWithBooksDTO authorGetDto = new AuthorWithBooksDTO();
 		authorGetDto.setId(author.getId());
 		authorGetDto.setName(author.getName());

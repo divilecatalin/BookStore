@@ -1,10 +1,17 @@
 package com.app.bookstore.user;
 
+import java.util.Set;
+
+import com.app.bookstore.appointment.Appointment;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,6 +37,9 @@ public class User {
 	
 	@Column(name="mail")
 	private String email;
+	
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, fetch = FetchType.LAZY, orphanRemoval = true)
+	private Set<Appointment> appointments;
 
 	public Integer getId() {
 		return id;
@@ -78,7 +88,23 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Set<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(Set<Appointment> appointments) {
+		this.appointments = appointments;
+	}
 	
+	public void addAppointment(Appointment appointment) {
+		this.appointments.add(appointment);
+		appointment.setUser(this);
+	}
 	
+	public void removeAppointment(Appointment appointment) {
+		this.appointments.remove(appointment);
+		appointment.setUser(null);
+	}
 
 }

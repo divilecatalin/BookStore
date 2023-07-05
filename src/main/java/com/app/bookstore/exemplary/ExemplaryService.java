@@ -1,5 +1,6 @@
 package com.app.bookstore.exemplary;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class ExemplaryService {
 	private BookRepository bookRepository;
 
 	public Exemplary create(Exemplary exemplary, Integer bookId) {
+		exemplary.setControlDate(LocalDateTime.now());
 		Book book = bookRepository.findById(bookId).orElseThrow();
 		book.addExemplary(exemplary);
 		return exemplaryRepository.saveAndFlush(exemplary);
@@ -39,6 +41,7 @@ public class ExemplaryService {
 		existingExemplary.setPageNumber(exemplary.getPageNumber());
 		existingExemplary.setReleaseDate(exemplary.getReleaseDate());
 		existingExemplary.setStampCode(exemplary.getStampCode());
+		existingExemplary.setControlDate(LocalDateTime.now());
 		return exemplaryRepository.save(existingExemplary);
 	}
 

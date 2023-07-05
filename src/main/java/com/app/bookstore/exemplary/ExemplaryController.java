@@ -64,7 +64,7 @@ public class ExemplaryController {
 	
 	@DeleteMapping("/{id}")
 	public void deleteExemplary(@RequestBody GenericDeleteDTO deleteId, @PathVariable Integer id) {
-		exemplaryService.delete(id,deleteId.getId());
+		exemplaryService.delete(id,deleteId.getBookId());
 	}
 
 }

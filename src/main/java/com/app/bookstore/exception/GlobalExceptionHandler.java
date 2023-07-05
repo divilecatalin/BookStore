@@ -30,6 +30,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		return new ResponseEntity<>(errorDetails,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	@ExceptionHandler(ValidationException.class)
+	public ResponseEntity<?> handleValidationException(ValidationException e){
+		ErrorDetails errorDetails = new ErrorDetails(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+		return new ResponseEntity<>(errorDetails,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers,HttpStatusCode status, WebRequest request){
